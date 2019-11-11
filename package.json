@@ -3,14 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/core": "^10.0.22",
+    "@emotion/styled": "^10.0.23",
+    "@mollycule/redux-hook": "^1.0.8",
+    "@mollycule/redux-operation": "^1.1.3",
     "@types/jest": "24.0.22",
     "@types/node": "12.12.7",
     "@types/react": "16.9.11",
     "@types/react-dom": "16.9.4",
+    "@types/redux": "^3.6.0",
+    "@welldone-software/why-did-you-render": "^3.3.9",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-scripts": "3.2.0",
-    "typescript": "3.7.2"
+    "redux": "^4.0.4",
+    "redux-saga": "^1.1.3",
+    "typescript": "3.7.2",
+    "xml-js": "^1.6.11"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -32,5 +41,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.6.1",
+    "@typescript-eslint/parser": "^2.6.1",
+    "eslint": "^6.6.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-standard": "^4.0.1"
   }
 }

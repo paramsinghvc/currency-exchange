@@ -1,12 +1,36 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import { css, Global } from "@emotion/core";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import App from "./core/App/App";
+import * as serviceWorker from "./serviceWorker";
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+const Root = (
+  <>
+    <Global
+      styles={css`
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          font-family: "Roboto", "Helvetica Neue", sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          background: #f2f2f2;
+          max-width: 500px;
+          margin: 0 auto;
+          width: 100%;
+          height: 100%;
+          position: relative;
+        }
+      `}
+    />
+    <App />
+  </>
+);
+
+ReactDOM.render(Root, document.getElementById("root"));
+
 serviceWorker.unregister();
