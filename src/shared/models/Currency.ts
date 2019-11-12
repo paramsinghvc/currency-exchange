@@ -9,17 +9,28 @@ export interface ICurrency {
   rate: number;
 }
 
+export type XMLAttributeData = {
+  _attributes: {
+    currency: string;
+    rate: string;
+  };
+};
+
 export class Currency implements ICurrency {
   name: string;
   symbol: string;
   code: string;
   rate: number;
 
-  static create(options: IObject<string>) {
+  static create(options: { currency: string; rate: string }) {
     return new Currency(options);
   }
 
-  constructor(options: IObject<string>) {
+  static createFromXMLData(xmlData: Array<XMLAttributeData>) {
+    return xmlData.map(({ _attributes: { currency, rate } }) => Currency.create({ currency, rate }));
+  }
+
+  constructor(options: { currency: string; rate: string }) {
     this.code = options.currency;
     this.rate = +options.rate;
     this.symbol = safeGet(currencyData, `[${this.code}].symbol`);

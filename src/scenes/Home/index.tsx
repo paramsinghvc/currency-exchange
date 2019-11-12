@@ -1,4 +1,5 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState, useEffect, useCallback } from "react";
+import useRedux from "@mollycule/redux-hook";
 
 import CurrencyChooser from "./components/CurrencyChooser";
 import theme from "shared/theme";
@@ -17,14 +18,43 @@ import {
   ButtonSection,
   ExchangeButton
 } from "./styles";
-import { fetchExchangeRateData } from "./home.saga";
+import { fetchExchangeRateSaga, setCurrencyModalStatus } from "./home.redux";
+import { IRootState } from "shared/types";
+import { IActionFactory } from "@mollycule/redux-operation";
 
 const Home: FC = () => {
-  const [isCurrencyChooserOpen, setIsCurrencyChooserOpen] = useState(false);
+  const {
+    currencyData,
+    currencyModalStatus,
+    setCurrencyModalStatus: setCurrencyModalStatusAction,
+    fetchExchangeRateSaga: fetchExchangeRateSagaAction
+  } = useRedux<
+    IRootState,
+    IRootState["home"],
+    {
+      setCurrencyModalStatus: IActionFactory<symbol, boolean>;
+      fetchExchangeRateSaga: IActionFactory<string, unknown>;
+    }
+  >(
+    state => ({
+      currencyModalStatus: state.home.currencyModalStatus,
+      currencyData: state.home.currencyData
+    }),
+    { setCurrencyModalStatus, fetchExchangeRateSaga }
+  );
 
   useEffect(() => {
-    fetchExchangeRateData();
-  }, []);
+    fetchExchangeRateSagaAction();
+  }, [fetchExchangeRateSagaAction]);
+
+  const handleCurrencyClick = useCallback(() => {
+    setCurrencyModalStatusAction(true);
+  }, [setCurrencyModalStatusAction]);
+
+  const closeCurrencyChooser = useCallback(() => {
+    setCurrencyModalStatusAction(false);
+  }, [setCurrencyModalStatusAction]);
+
   return (
     <>
       <Holder>
@@ -32,7 +62,7 @@ const Home: FC = () => {
         <Exchanger>
           <ExchangeSection>
             <StyledTextField paddingsize="large" fullWidth={false} value="12.34" onChange={() => {}} />
-            <CurrencyDropdown>
+            <CurrencyDropdown onClick={handleCurrencyClick}>
               <CurrencyAbbr>GBP</CurrencyAbbr>
               <CurrencyText>Pound Sterling</CurrencyText>
             </CurrencyDropdown>
@@ -42,7 +72,7 @@ const Home: FC = () => {
           </Separator>
           <ExchangeSection>
             <StyledTextField paddingsize="large" fullWidth={false} value="15.76" onChange={() => {}} />
-            <CurrencyDropdown>
+            <CurrencyDropdown onClick={handleCurrencyClick}>
               <CurrencyAbbr>USD</CurrencyAbbr>
               <CurrencyText>United States Dollar</CurrencyText>
             </CurrencyDropdown>
@@ -60,7 +90,7 @@ const Home: FC = () => {
           />
         </ButtonSection>
       </Holder>
-      <CurrencyChooser />
+      <CurrencyChooser open={currencyModalStatus} onClose={closeCurrencyChooser} currencyData={currencyData} />
     </>
   );
 };

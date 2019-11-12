@@ -18,14 +18,14 @@
 
 type ObjectType = Array<any> | { [key: string]: any } | undefined;
 
-function getProp(object: ObjectType, path: Array<string | number> | string, defaultVal?: any) {
+function getProp<T = any>(object: ObjectType, path: Array<string | number> | string, defaultVal?: T): T {
   const _path = Array.isArray(path) ? path : path.split(/[.[\]]/g).filter(i => i.length);
 
   if (!_path.length || typeof object === "undefined" || !object) {
-    return typeof object === "undefined" || object === null ? defaultVal : object;
+    return typeof object === "undefined" || object === null ? (defaultVal as T) : (object as T);
   }
 
-  return getProp(object[_path.shift() as string | number], _path, defaultVal);
+  return getProp<T>(object[_path.shift() as string | number], _path, defaultVal);
 }
 
 export default getProp;

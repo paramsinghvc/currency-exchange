@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 
 import { IRootState } from "shared/types";
-// import { appReducer } from "core/App/app.redux";
+import homeReducer from "scenes/Home/home.redux";
 
 const rootReducer = combineReducers<IRootState>({
-  home: () => {}
+  home: homeReducer
 });
 
 export default rootReducer;

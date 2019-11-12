@@ -1201,10 +1201,10 @@
     react "^16.8.6"
     redux "^4.0.1"
 
-"@mollycule/redux-operation@^1.1.3":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@mollycule/redux-operation/-/redux-operation-1.1.3.tgz#37e2077643ef908a3851f3ab99bf20191730f6cc"
-  integrity sha512-32YOjkcAjM2Lpm9tOQZQ1zcSUFWDoaw8nPkxQAl11ESdlzneNCdMCNLXPEa7tc7x/GeIC3GHuEq135H8a3x+pA==
+"@mollycule/redux-operation@^1.1.5":
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/@mollycule/redux-operation/-/redux-operation-1.1.5.tgz#87b7865558401acc5a78fd598bc25dfc0d652d0a"
+  integrity sha512-1FLs9ZPvdvIBrqRTuhvGPVlo7L/mCU/YukxJOPQawWbKplzOUf4iGgX0GYEeuNVaOETQ/2e1rPMvFBJyvDO1Gg==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"

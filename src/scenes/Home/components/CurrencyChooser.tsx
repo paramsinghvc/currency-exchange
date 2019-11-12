@@ -3,6 +3,8 @@ import styled from "@emotion/styled";
 
 import Modal from "shared/components/Modal";
 import theme from "shared/theme";
+import { Currency } from "shared/models/Currency";
+import { IReduxOperations } from "@mollycule/redux-operation";
 
 const Holder = styled.main`
   padding: 20px;
@@ -30,36 +32,15 @@ const CurrencySubText = styled.p`
   margin-top: 7px;
 `;
 
-const CurrencyChooser: FC = () => {
+const CurrencyChooser: FC<{ open: boolean; onClose: () => void; currencyData: IReduxOperations<Currency[]> }> = ({
+  open,
+  onClose,
+  currencyData
+}) => {
   return (
-    <Modal open onClose={() => {}}>
+    <Modal open={open} onClose={onClose}>
       <Holder>
-        {[
-          { code: "GBP", name: "Pound Sterling" },
-          { code: "USD", name: "United States Dollar" },
-          { code: "GBP", name: "Pound Sterling" },
-          { code: "USD", name: "United States Dollar" },
-          { code: "GBP", name: "Pound Sterling" },
-          { code: "USD", name: "United States Dollar" },
-          { code: "GBP", name: "Pound Sterling" },
-          { code: "USD", name: "United States Dollar" },
-          { code: "GBP", name: "Pound Sterling" },
-          { code: "USD", name: "United States Dollar" },
-          { code: "GBP", name: "Pound Sterling" },
-          { code: "USD", name: "United States Dollar" },
-          { code: "GBP", name: "Pound Sterling" },
-          { code: "USD", name: "United States Dollar" },
-          { code: "GBP", name: "Pound Sterling" },
-          { code: "USD", name: "United States Dollar" },
-          { code: "GBP", name: "Pound Sterling" },
-          { code: "USD", name: "United States Dollar" },
-          { code: "GBP", name: "Pound Sterling" },
-          { code: "USD", name: "United States Dollar" },
-          { code: "GBP", name: "Pound Sterling" },
-          { code: "USD", name: "United States Dollar" },
-          { code: "GBP", name: "Pound Sterling" },
-          { code: "USD", name: "United States Dollar" }
-        ].map(({ code, name }) => (
+        {(currencyData.payload || []).map(({ code, name }) => (
           <ListItem key={code}>
             <CurrencyCode>{code}</CurrencyCode>
             <CurrencySubText>{name}</CurrencySubText>

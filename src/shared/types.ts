@@ -1,5 +1,7 @@
+import { HomeState } from "scenes/Home/home.redux";
+
 export interface IRootState {
-  home: any;
+  home: HomeState;
 }
 
 export interface IObject<T = any> {

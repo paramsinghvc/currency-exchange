@@ -1,18 +1,35 @@
 import { xml2js } from "xml-js";
+import { put, select, takeLatest, call } from "redux-saga/effects";
 
-export const fetchExchangeRateData = async () => {
-  const xmlResponse = await fetch(
-    "https://cors-anywhere.herokuapp.com/https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml"
-  );
-  const xmlText = await xmlResponse.text();
-  const jsData = xml2js(xmlText, {
-    compact: true,
-    ignoreDeclaration: true,
-    ignoreInstruction: true,
-    ignoreComment: true,
-    ignoreCdata: true,
-    ignoreDoctype: true,
-    ignoreText: true
-  });
-  debugger;
-};
+import safeGet from "shared/utils/safeGet";
+import { Currency, XMLAttributeData } from "shared/models/Currency";
+import { fetchCurrencyDataRequest, fetchCurrencyDataSuccess, fetchCurrencyDataFailure } from "./home.redux";
+
+function* fetchExchangeRateData() {
+  try {
+    yield put(fetchCurrencyDataRequest());
+    const xmlResponse = yield call(
+      fetch,
+      "https://cors-anywhere.herokuapp.com/https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml"
+    );
+    const xmlText = yield xmlResponse.text();
+    const jsData = xml2js(xmlText, {
+      compact: true,
+      ignoreDeclaration: true,
+      ignoreInstruction: true,
+      ignoreComment: true,
+      ignoreCdata: true,
+      ignoreDoctype: true,
+      ignoreText: true
+    });
+    const xmlAttributeData = safeGet<XMLAttributeData[]>(jsData, "gesmes:Envelope.Cube.Cube.Cube", []);
+    const currencyData: Currency[] = Currency.createFromXMLData(xmlAttributeData);
+    yield put(fetchCurrencyDataSuccess(currencyData));
+  } catch (e) {
+    yield put(fetchCurrencyDataFailure(e));
+  }
+}
+
+export function* watchExchangeRateData() {
+  yield takeLatest("FETCH_EXCHANGE_RATE_DATA", fetchExchangeRateData);
+}
