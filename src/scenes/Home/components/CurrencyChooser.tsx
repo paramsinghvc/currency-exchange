@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import styled from "@emotion/styled";
 
 import Modal from "shared/components/Modal";
@@ -17,6 +17,7 @@ const ListItem = styled.section`
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
+  cursor: pointer;
 `;
 
 const CurrencyCode = styled.p`
@@ -32,18 +33,27 @@ const CurrencySubText = styled.p`
   margin-top: 7px;
 `;
 
-const CurrencyChooser: FC<{ open: boolean; onClose: () => void; currencyData: IReduxOperations<Currency[]> }> = ({
-  open,
-  onClose,
-  currencyData
-}) => {
+const CurrencyChooser: FC<{
+  open: boolean;
+  onClose: () => void;
+  currencyData: IReduxOperations<Currency[]>;
+  onChange: (val: Currency) => void;
+}> = ({ open, onClose, currencyData, onChange }) => {
+  const handleClick = useCallback(
+    (currency: Currency) => () => {
+      onChange(currency);
+      onClose();
+    },
+    [onChange, onClose]
+  );
+
   return (
     <Modal open={open} onClose={onClose}>
-      <Holder>
-        {(currencyData.payload || []).map(({ code, name }) => (
-          <ListItem key={code}>
-            <CurrencyCode>{code}</CurrencyCode>
-            <CurrencySubText>{name}</CurrencySubText>
+      <Holder role="ul">
+        {(currencyData.payload || []).map(currency => (
+          <ListItem key={currency.code} onClick={handleClick(currency)} role="li">
+            <CurrencyCode>{currency.code}</CurrencyCode>
+            <CurrencySubText>{currency.name}</CurrencySubText>
           </ListItem>
         ))}
       </Holder>

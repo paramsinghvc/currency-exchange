@@ -5,7 +5,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.22",
     "@emotion/styled": "^10.0.23",
-    "@mollycule/redux-hook": "^1.0.8",
+    "@mollycule/redux-hook": "^1.0.9",
     "@mollycule/redux-operation": "^1.1.5",
     "@types/jest": "24.0.22",
     "@types/node": "12.12.7",

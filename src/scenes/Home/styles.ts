@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import TextField from "shared/components/TextField";
+import CurrencyInput from "./components/CurrencyInput";
 import Button from "shared/components/Button";
 import theme from "shared/theme";
 
@@ -34,13 +34,14 @@ export const Exchanger = styled.section`
 export const ExchangeSection = styled.section`
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
 `;
 
 export const CurrencyDropdown = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const CurrencyAbbr = styled.p`
@@ -55,9 +56,12 @@ export const CurrencyText = styled.p`
   font-size: 9px;
 `;
 
-export const StyledTextField = styled(TextField)`
-  max-width: 80px;
+export const StyledCurrencyInput = styled(CurrencyInput)`
+  min-width: 80px;
+  width: auto;
   font-size: 18px;
+  max-width: 110px;
+  text-align: center;
 `;
 
 export const Separator = styled.div`

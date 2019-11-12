@@ -1193,11 +1193,13 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@mollycule/redux-hook@^1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@mollycule/redux-hook/-/redux-hook-1.0.8.tgz#34d0bec45bc36858f01fd2bb29b195d7bc4c2327"
-  integrity sha512-bB16V3fruBzs3098gEKhxieWw5seGt0OCZy1+Gj5xQKxMH2kxj6EbLBBFc8aEN+vhDtItPsiEPM0+lIzUEyERg==
+"@mollycule/redux-hook@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@mollycule/redux-hook/-/redux-hook-1.0.9.tgz#fc0b8df20174349d6ffd403af90ed0529e2b37c0"
+  integrity sha512-oAntlJ73S1ZYZ2mHeTWVGLhcuQX5kalOvsUO1BxB/rEhvQUjgR+jdw0SLvyI6tV3M94tfzcfIsHt8eP5tQhVLg==
   dependencies:
+    "@types/react" "^16.9.11"
+    "@types/redux" "^3.6.0"
     react "^16.8.6"
     redux "^4.0.1"
 
@@ -1463,7 +1465,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@16.9.11":
+"@types/react@*", "@types/react@16.9.11", "@types/react@^16.9.11":
   version "16.9.11"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.11.tgz#70e0b7ad79058a7842f25ccf2999807076ada120"
   integrity sha512-UBT4GZ3PokTXSWmdgC/GeCGEJXE5ofWyibCcecRLUVN2ZBpXQGVgQGtG2foS7CrTKFKlQVVswLvf7Js6XA/CVQ==
