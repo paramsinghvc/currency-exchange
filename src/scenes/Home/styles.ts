@@ -10,6 +10,11 @@ export const Holder = styled.main`
   justify-content: stretch;
 `;
 
+export const ActiveExchangeRateHolder = styled.section`
+  align-self: center;
+  justify-self: center;
+`;
+
 export const ActiveExchangeRate = styled.section`
   background: #f2f2f2;
   color: #646464;
@@ -21,8 +26,6 @@ export const ActiveExchangeRate = styled.section`
   font-size: 14px;
   line-height: 14px;
   text-align: center;
-  align-self: center;
-  justify-self: center;
 `;
 
 export const Exchanger = styled.section`

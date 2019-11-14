@@ -12,8 +12,6 @@ const Backdrop = styled.section`
   max-width: inherit;
   height: inherit;
   background: rgba(255, 255, 255, 0.7);
-  /* -webkit-filter: blur(12px);
-  filter: blur(12px); */
 `;
 
 const Header = styled.header`

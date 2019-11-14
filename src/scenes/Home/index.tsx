@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect, useCallback, ChangeEvent, FormEvent, useMemo } from "react";
 import useRedux from "@mollycule/redux-hook";
+import Anime from "shared/components/Anime";
 
 import safeGet from "shared/utils/safeGet";
 import CurrencyChooser from "./components/CurrencyChooser";
@@ -17,7 +18,8 @@ import {
   Separator,
   CoinIcon,
   ButtonSection,
-  ExchangeButton
+  ExchangeButton,
+  ActiveExchangeRateHolder
 } from "./styles";
 import { fetchExchangeRateSaga, setCurrencyModalStatus } from "./home.redux";
 import { IRootState } from "shared/types";
@@ -141,10 +143,29 @@ const Home: FC = () => {
     [selectedCurrencies, selectedSection, getUpdatedCurrencyAmounts, setCurrencyAmounts]
   );
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsOpen(true);
+    }, 1000);
+
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 4000);
+  }, []);
   return (
     <>
       <Holder>
-        <ActiveExchangeRate dangerouslySetInnerHTML={activeExchangeRateString} />
+        <ActiveExchangeRateHolder>
+          <Anime
+            open={!currencyData.pending && currencyData.success}
+            duration={1000}
+            onEntering={{ translateY: [-20, 0], opacity: [0, 1] }}
+          >
+            <ActiveExchangeRate dangerouslySetInnerHTML={activeExchangeRateString} />
+          </Anime>
+        </ActiveExchangeRateHolder>
         <Exchanger>
           <ExchangeSection>
             <StyledCurrencyInput
@@ -159,7 +180,18 @@ const Home: FC = () => {
             </CurrencyDropdown>
           </ExchangeSection>
           <Separator>
-            <CoinIcon src={CoinImg} />
+            <Anime
+              open={currencyData.pending}
+              duration={500}
+              unmountOnExit={false}
+              direction="alternate"
+              initProps={{ translateY: -29 }}
+              onEntering={{ scale: [1, 1.2], loop: true }}
+              onExiting={{ loop: false }}
+              easing="linear"
+            >
+              <CoinIcon src={CoinImg} />
+            </Anime>
           </Separator>
           <ExchangeSection>
             <StyledCurrencyInput

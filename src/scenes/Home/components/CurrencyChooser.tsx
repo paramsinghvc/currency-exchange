@@ -5,6 +5,7 @@ import Modal from "shared/components/Modal";
 import theme from "shared/theme";
 import { Currency } from "shared/models/Currency";
 import { IReduxOperations } from "@mollycule/redux-operation";
+import Anime from "shared/components/Anime";
 
 const Holder = styled.main`
   padding: 20px;
@@ -49,14 +50,16 @@ const CurrencyChooser: FC<{
 
   return (
     <Modal open={open} onClose={onClose}>
-      <Holder role="ul">
-        {(currencyData.payload || []).map(currency => (
-          <ListItem key={currency.code} onClick={handleClick(currency)} role="li">
-            <CurrencyCode>{currency.code}</CurrencyCode>
-            <CurrencySubText>{currency.name}</CurrencySubText>
-          </ListItem>
-        ))}
-      </Holder>
+      <Anime open={open} duration={1000}>
+        <Holder role="ul">
+          {(currencyData.payload || []).map(currency => (
+            <ListItem key={currency.code} onClick={handleClick(currency)} role="li">
+              <CurrencyCode>{currency.code}</CurrencyCode>
+              <CurrencySubText>{currency.name}</CurrencySubText>
+            </ListItem>
+          ))}
+        </Holder>
+      </Anime>
     </Modal>
   );
 };
