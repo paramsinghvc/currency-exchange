@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 
 import theme from "shared/theme";
 import Anime from "shared/components/Anime";
+import animejs from "animejs";
 
 const Header = styled.header`
   display: flex;
@@ -33,13 +34,24 @@ const Hamburger = styled.section`
 const Navbar: FC = () => {
   return (
     <Header>
-      <Anime open duration={1000} onEntering={{ translateX: ["-100%", 0] }}>
-        <Hamburger role="button">
+      <Hamburger role="button">
+        <Anime
+          open
+          duration={800}
+          onEntering={{
+            opacity: [0, 1],
+            translateX: ["-100%", 0],
+            scaleX: [1.2],
+            delay: animejs.stagger(50),
+            easing: "easeInOutQuart"
+          }}
+          onEntered={{ scaleX: 1, delay: animejs.stagger(75), duration: 300, easing: "linear" }}
+        >
           <span></span>
           <span></span>
           <span></span>
-        </Hamburger>
-      </Anime>
+        </Anime>
+      </Hamburger>
     </Header>
   );
 };

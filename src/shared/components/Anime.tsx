@@ -27,7 +27,7 @@ export const AnimeComp: FC<AnimeProps & { status: TransitionStatus }> = ({
   initProps,
   ...props
 }) => {
-  const childRef = useRef<HTMLElement>();
+  const childRef = useRef<HTMLElement[]>([]);
 
   const buildAnimeOptions = useCallback(
     (
@@ -69,6 +69,10 @@ export const AnimeComp: FC<AnimeProps & { status: TransitionStatus }> = ({
     const animeRef = anime(animeOptions);
   }, [status, childRef, duration, initProps]);
 
+  const addTargetRef = useCallback(target => {
+    childRef.current = [...childRef.current, target];
+  }, []);
+
   return (
     <>
       {React.Children.map(
@@ -76,7 +80,7 @@ export const AnimeComp: FC<AnimeProps & { status: TransitionStatus }> = ({
         (child, i) =>
           React.isValidElement(child) &&
           React.cloneElement(child, {
-            ref: childRef
+            ref: addTargetRef
           })
       )}
     </>
