@@ -4,7 +4,7 @@ const theme = {
   borderColor: "#F2F2F2",
   subTextColor: "#979797",
   darkGrayTextColor: "#646464",
-  highlightColor: "#648CFF"
+  highlightColor: "#425eb1"
 };
 
 export default theme;

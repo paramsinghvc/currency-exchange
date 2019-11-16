@@ -27,36 +27,7 @@ exports[`matches the snapshot 1`] = `
     >
       <section
         className="css-1oskuwq"
-      >
-        <div
-          className="css-1qvptwv"
-          onChange={[Function]}
-          type="text"
-          value="15.34"
-        >
-          <input
-            className="css-5qep15"
-            onChange={[Function]}
-            type="text"
-            value="15.34"
-          />
-        </div>
-        <div
-          className="css-1x7hx5v"
-          onClick={[Function]}
-        >
-          <p
-            className="css-1b5o5hi"
-          >
-            
-          </p>
-          <p
-            className="css-1j7n4jp"
-          >
-            
-          </p>
-        </div>
-      </section>
+      />
       <div
         className="css-aijkp"
       >
@@ -67,36 +38,7 @@ exports[`matches the snapshot 1`] = `
       </div>
       <section
         className="css-1oskuwq"
-      >
-        <div
-          className="css-1qvptwv"
-          onChange={[Function]}
-          type="text"
-          value="19.73"
-        >
-          <input
-            className="css-5qep15"
-            onChange={[Function]}
-            type="text"
-            value="19.73"
-          />
-        </div>
-        <div
-          className="css-1x7hx5v"
-          onClick={[Function]}
-        >
-          <p
-            className="css-1b5o5hi"
-          >
-            
-          </p>
-          <p
-            className="css-1j7n4jp"
-          >
-            
-          </p>
-        </div>
-      </section>
+      />
     </section>
     <section
       className="css-1hppjzv"

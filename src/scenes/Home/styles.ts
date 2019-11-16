@@ -59,9 +59,15 @@ export const CurrencyText = styled.p`
   font-size: 9px;
 `;
 
-export const StyledCurrencyInput = styled(CurrencyInput)`
+export const StyledCurrencyInputHolder = styled.section`
   min-width: 80px;
   width: auto;
+  max-width: 110px;
+  text-align: center;
+`;
+
+export const StyledCurrencyInput = styled(CurrencyInput)`
+  width: 100%;
   font-size: 18px;
   max-width: 110px;
   text-align: center;
@@ -90,4 +96,20 @@ export const ButtonSection = styled.section`
 export const ExchangeButton = styled(Button)`
   font-weight: 500;
   font-size: 12px;
+  outline: none;
+`;
+
+export const Toast = styled.main`
+  padding: 10px 20px;
+  background: rgba(186, 220, 88, 0.9);
+  color: ${theme.darkGrayTextColor};
+  font-size: 14px;
+  text-align: center;
+  position: absolute;
+  z-index: 2;
+  top: 60px;
+  left: 50%;
+  margin-left: -125px;
+  color: white;
+  border-radius: ${theme.borderRadius};
 `;

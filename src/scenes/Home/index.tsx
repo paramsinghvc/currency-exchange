@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect, useCallback, ChangeEvent, FormEvent, useMemo } from "react";
 import useRedux from "@mollycule/redux-hook";
 import Anime from "shared/components/Anime";
+import animejs from "animejs";
 
 import safeGet from "shared/utils/safeGet";
 import CurrencyChooser from "./components/CurrencyChooser";
@@ -19,7 +20,8 @@ import {
   CoinIcon,
   ButtonSection,
   ExchangeButton,
-  ActiveExchangeRateHolder
+  ActiveExchangeRateHolder,
+  Toast
 } from "./styles";
 import { fetchExchangeRateSaga, setCurrencyModalStatus } from "./home.redux";
 import { IRootState } from "shared/types";
@@ -154,6 +156,15 @@ const Home: FC = () => {
       setIsOpen(false);
     }, 4000);
   }, []);
+
+  const [showToast, setShowToast] = useState(false);
+  const handleExchange = useCallback(() => {
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 2000);
+  }, []);
+
   return (
     <>
       <Holder>
@@ -168,16 +179,24 @@ const Home: FC = () => {
         </ActiveExchangeRateHolder>
         <Exchanger>
           <ExchangeSection>
-            <StyledCurrencyInput
-              paddingsize="large"
-              fullWidth={false}
-              value={currencyAmounts[0]}
-              onChange={updateCurrencyAmount(0)}
-            />
-            <CurrencyDropdown onClick={handleCurrencyClick(0)}>
-              <CurrencyAbbr>{safeGet(selectedCurrencies, "0.code", "")}</CurrencyAbbr>
-              <CurrencyText>{safeGet(selectedCurrencies, "0.name", "")}</CurrencyText>
-            </CurrencyDropdown>
+            <Anime
+              open={!currencyData.pending && currencyData.success}
+              duration={1000}
+              onEntering={{ translateX: ["-100%", 0], opacity: [0, 1], delay: animejs.stagger(100) }}
+            >
+              <section>
+                <StyledCurrencyInput
+                  paddingsize="large"
+                  fullWidth={false}
+                  value={currencyAmounts[0]}
+                  onChange={updateCurrencyAmount(0)}
+                />
+              </section>
+              <CurrencyDropdown onClick={handleCurrencyClick(0)}>
+                <CurrencyAbbr>{safeGet(selectedCurrencies, "0.code", "")}</CurrencyAbbr>
+                <CurrencyText>{safeGet(selectedCurrencies, "0.name", "")}</CurrencyText>
+              </CurrencyDropdown>
+            </Anime>
           </ExchangeSection>
           <Separator>
             <Anime
@@ -194,27 +213,36 @@ const Home: FC = () => {
             </Anime>
           </Separator>
           <ExchangeSection>
-            <StyledCurrencyInput
-              paddingsize="large"
-              fullWidth={false}
-              value={currencyAmounts[1]}
-              onChange={updateCurrencyAmount(1)}
-            />
-            <CurrencyDropdown onClick={handleCurrencyClick(1)}>
-              <CurrencyAbbr>{safeGet(selectedCurrencies, "1.code", "")}</CurrencyAbbr>
-              <CurrencyText>{safeGet(selectedCurrencies, "1.name", "")}</CurrencyText>
-            </CurrencyDropdown>
+            <Anime
+              open={!currencyData.pending && currencyData.success}
+              duration={1000}
+              onEntering={{ translateX: ["100%", 0], opacity: [0, 1], delay: animejs.stagger(150) }}
+            >
+              <section>
+                <StyledCurrencyInput
+                  paddingsize="large"
+                  fullWidth={false}
+                  value={currencyAmounts[1]}
+                  onChange={updateCurrencyAmount(1)}
+                />
+              </section>
+              <CurrencyDropdown onClick={handleCurrencyClick(1)}>
+                <CurrencyAbbr>{safeGet(selectedCurrencies, "1.code", "")}</CurrencyAbbr>
+                <CurrencyText>{safeGet(selectedCurrencies, "1.name", "")}</CurrencyText>
+              </CurrencyDropdown>
+            </Anime>
           </ExchangeSection>
         </Exchanger>
         <ButtonSection>
           <ExchangeButton
-            onClick={() => {}}
+            onClick={handleExchange}
             label="EXCHANGE"
             color={theme.primaryColor}
             highlightColor={theme.highlightColor}
             fullWidth={false}
             rounded
             size="x-large"
+            disabled={currencyData.pending || !currencyData.success}
           />
         </ButtonSection>
       </Holder>
@@ -224,6 +252,14 @@ const Home: FC = () => {
         currencyData={currencyChooserData}
         onChange={handleSelectedCurrencyChange}
       />
+      <Anime
+        open={showToast}
+        duration={500}
+        onEntering={{ translateY: ["-100%", 0], opacity: [0, 1] }}
+        onExiting={{ translateY: "-100%", opacity: 0 }}
+      >
+        <Toast>Currency Exchanged successfully</Toast>
+      </Anime>
     </>
   );
 };
