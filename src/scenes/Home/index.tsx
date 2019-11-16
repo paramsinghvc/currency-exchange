@@ -21,7 +21,8 @@ import {
   ButtonSection,
   ExchangeButton,
   ActiveExchangeRateHolder,
-  Toast
+  Toast,
+  StyledCurrencyInputHolder
 } from "./styles";
 import { fetchExchangeRateSaga, setCurrencyModalStatus } from "./home.redux";
 import { IRootState } from "shared/types";
@@ -184,14 +185,14 @@ const Home: FC = () => {
               duration={1000}
               onEntering={{ translateX: ["-100%", 0], opacity: [0, 1], delay: animejs.stagger(100) }}
             >
-              <section>
+              <StyledCurrencyInputHolder>
                 <StyledCurrencyInput
                   paddingsize="large"
                   fullWidth={false}
                   value={currencyAmounts[0]}
                   onChange={updateCurrencyAmount(0)}
                 />
-              </section>
+              </StyledCurrencyInputHolder>
               <CurrencyDropdown onClick={handleCurrencyClick(0)}>
                 <CurrencyAbbr>{safeGet(selectedCurrencies, "0.code", "")}</CurrencyAbbr>
                 <CurrencyText>{safeGet(selectedCurrencies, "0.name", "")}</CurrencyText>
@@ -218,14 +219,14 @@ const Home: FC = () => {
               duration={1000}
               onEntering={{ translateX: ["100%", 0], opacity: [0, 1], delay: animejs.stagger(150) }}
             >
-              <section>
+              <StyledCurrencyInputHolder>
                 <StyledCurrencyInput
                   paddingsize="large"
                   fullWidth={false}
                   value={currencyAmounts[1]}
                   onChange={updateCurrencyAmount(1)}
                 />
-              </section>
+              </StyledCurrencyInputHolder>
               <CurrencyDropdown onClick={handleCurrencyClick(1)}>
                 <CurrencyAbbr>{safeGet(selectedCurrencies, "1.code", "")}</CurrencyAbbr>
                 <CurrencyText>{safeGet(selectedCurrencies, "1.name", "")}</CurrencyText>

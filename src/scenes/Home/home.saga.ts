@@ -1,5 +1,5 @@
 import { xml2js } from "xml-js";
-import { put, select, takeLatest, call } from "redux-saga/effects";
+import { put, delay, takeLatest, call } from "redux-saga/effects";
 
 import safeGet from "shared/utils/safeGet";
 import { Currency, XMLAttributeData } from "shared/models/Currency";
@@ -31,5 +31,10 @@ export function* fetchExchangeRateData() {
 }
 
 export function* watchExchangeRateData() {
-  yield takeLatest("FETCH_EXCHANGE_RATE_DATA", fetchExchangeRateData);
+  yield takeLatest("FETCH_EXCHANGE_RATE_DATA", function* pollFetchExchangeRateApi() {
+    while (true) {
+      yield call(fetchExchangeRateData);
+      yield delay(20000);
+    }
+  });
 }

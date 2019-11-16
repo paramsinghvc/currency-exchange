@@ -24,8 +24,9 @@ exports[`Should render Home properly should match the home snapshot 1`] = `
     className="css-1hppjzv"
   >
     <button
-      className="css-fi2zjy"
+      className="css-zgqnjn"
       color="#3A539B"
+      disabled={true}
       label="EXCHANGE"
       onClick={[Function]}
       size="x-large"
