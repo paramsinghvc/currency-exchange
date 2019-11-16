@@ -5,7 +5,7 @@ import safeGet from "shared/utils/safeGet";
 import { Currency, XMLAttributeData } from "shared/models/Currency";
 import { fetchCurrencyDataRequest, fetchCurrencyDataSuccess, fetchCurrencyDataFailure } from "./home.redux";
 
-function* fetchExchangeRateData() {
+export function* fetchExchangeRateData() {
   try {
     yield put(fetchCurrencyDataRequest());
     const xmlResponse = yield call(

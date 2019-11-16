@@ -9,7 +9,7 @@ import {
 import { Currency } from "shared/models/Currency";
 
 const SET_CURRENCY_MODAL_STATUS = "SET_CURRENCY_MODAL_STATUS";
-const HomeConstants = makeConstants([SET_CURRENCY_MODAL_STATUS]);
+export const HomeConstants = makeConstants([SET_CURRENCY_MODAL_STATUS]);
 
 const {
   actions: [fetchCurrencyDataRequest, fetchCurrencyDataSuccess, fetchCurrencyDataFailure],
@@ -19,11 +19,11 @@ const {
 
 export const fetchExchangeRateSaga = createActionWithPayload("FETCH_EXCHANGE_RATE_DATA");
 
-export const setCurrencyModalStatus = createActionWithPayload<symbol, boolean>(HomeConstants.get(
-  SET_CURRENCY_MODAL_STATUS
-) as symbol);
+export const setCurrencyModalStatus = createActionWithPayload<symbol, boolean>(
+  HomeConstants.get(SET_CURRENCY_MODAL_STATUS) as symbol
+);
 
-const initialState = {
+export const initialState = {
   currencyModalStatus: false
 };
 
@@ -42,4 +42,4 @@ export default augmentReducer<HomeState, IAction<symbol, any>>(homeReducer)({
   currencyData: fetchCurrencyDataReducer
 });
 
-export { fetchCurrencyDataRequest, fetchCurrencyDataSuccess, fetchCurrencyDataFailure };
+export { fetchCurrencyDataRequest, fetchCurrencyDataSuccess, fetchCurrencyDataFailure, fetchCurrencyDataConstants };

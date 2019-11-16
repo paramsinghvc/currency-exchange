@@ -1,0 +1,306 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders ActiveExchangeRate correctly 1`] = `
+.emotion-0 {
+  background: #f2f2f2;
+  color: #646464;
+  font-size: 12px;
+  padding: 15px 20px;
+  border-radius: 5px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 14px;
+  text-align: center;
+}
+
+<section
+  className="emotion-0"
+>
+  Loerm Ipsum
+</section>
+`;
+
+exports[`renders ActiveExchangeRateHolder correctly 1`] = `
+.emotion-0 {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  justify-self: center;
+}
+
+<section
+  className="emotion-0"
+>
+  Loerm Ipsum
+</section>
+`;
+
+exports[`renders ButtonSection correctly 1`] = `
+.emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+<section
+  className="emotion-0"
+>
+  Loerm Ipsum
+</section>
+`;
+
+exports[`renders CoinIcon correctly 1`] = `
+.emotion-0 {
+  position: absolute;
+  top: 50%;
+  left: -29px;
+  -webkit-transform: translateY(-29px);
+  -ms-transform: translateY(-29px);
+  transform: translateY(-29px);
+}
+
+<img
+  className="emotion-0"
+/>
+`;
+
+exports[`renders CurrencyAbbr correctly 1`] = `
+.emotion-0 {
+  color: #3A539B;
+  font-size: 38px;
+  text-transform: uppercase;
+  margin: 12px auto 12px auto;
+}
+
+<p
+  className="emotion-0"
+>
+  Loerm Ipsum
+</p>
+`;
+
+exports[`renders CurrencyDropdown correctly 1`] = `
+.emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+<div
+  className="emotion-0"
+>
+  Loerm Ipsum
+</div>
+`;
+
+exports[`renders CurrencyText correctly 1`] = `
+.emotion-0 {
+  color: #979797;
+  font-size: 9px;
+}
+
+<p
+  className="emotion-0"
+>
+  Loerm Ipsum
+</p>
+`;
+
+exports[`renders ExchangeButton correctly 1`] = `
+.emotion-0 {
+  padding: 15px 25px;
+  text-align: center;
+  background-color: #7b68ee;
+  width: auto;
+  font-size: 1em;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  border-radius: 0;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.emotion-0[disabled] {
+  background-color: #d5d5d5;
+}
+
+.emotion-0:hover {
+  background-color: #5b43ea;
+  color: #ffffff;
+}
+
+<button
+  className="emotion-0"
+  color="#7b68ee"
+  size="large"
+>
+  Loerm Ipsum
+</button>
+`;
+
+exports[`renders ExchangeSection correctly 1`] = `
+.emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+<section
+  className="emotion-0"
+>
+  Loerm Ipsum
+</section>
+`;
+
+exports[`renders Exchanger correctly 1`] = `
+.emotion-0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+  -webkit-justify-content: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+<section
+  className="emotion-0"
+>
+  Loerm Ipsum
+</section>
+`;
+
+exports[`renders Separator correctly 1`] = `
+.emotion-0 {
+  height: 100%;
+  width: 1px;
+  background: #F2F2F2;
+  position: relative;
+}
+
+<div
+  className="emotion-0"
+>
+  Loerm Ipsum
+</div>
+`;
+
+exports[`renders StyledCurrencyInput correctly 1`] = `
+.emotion-1 {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  font-size: 16px;
+  border: 2px solid #F2F2F2;
+  border-radius: 5px;
+  min-width: 80px;
+  width: auto;
+  font-size: 18px;
+  max-width: 110px;
+  text-align: center;
+}
+
+.emotion-1:focus-within {
+  border: 2px solid #3A539B;
+}
+
+.emotion-0 {
+  background: none;
+  padding: 15px 15px;
+  border: none;
+  outline: none;
+  min-width: 80px;
+  width: auto;
+  font-size: 18px;
+  max-width: 110px;
+  text-align: center;
+}
+
+<div
+  className="emotion-1"
+  onChange={[Function]}
+  type="text"
+  value=""
+>
+  <input
+    className="emotion-0"
+    onChange={[Function]}
+    type="text"
+    value=""
+  >
+    Loerm Ipsum
+  </input>
+</div>
+`;
+
+exports[`renders holder correctly 1`] = `
+.emotion-0 {
+  display: grid;
+  grid-template-rows: minmax(140px,auto) minmax(180px,auto) 170px;
+  -webkit-box-pack: stretch;
+  -webkit-justify-content: stretch;
+  -ms-flex-pack: stretch;
+  justify-content: stretch;
+}
+
+<main
+  className="emotion-0"
+>
+  hello world
+</main>
+`;
+
+exports[`renders holder correctly 2`] = `
+.emotion-0 {
+  display: grid;
+  grid-template-rows: minmax(140px,auto) minmax(180px,auto) 170px;
+  -webkit-box-pack: stretch;
+  -webkit-justify-content: stretch;
+  -ms-flex-pack: stretch;
+  justify-content: stretch;
+}
+
+<main
+  className="emotion-0"
+>
+  hello world
+</main>
+`;

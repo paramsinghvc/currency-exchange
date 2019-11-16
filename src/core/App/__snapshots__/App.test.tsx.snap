@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches the snapshot 1`] = `
+<main
+  className="css-o8uaij"
+>
+  <header
+    className="css-uf1ume"
+  >
+    <section
+      className="css-m6ba0"
+      role="button"
+    >
+      <span />
+      <span />
+      <span />
+    </section>
+  </header>
+  <main
+    className="css-13qacuc"
+  >
+    <section
+      className="css-k68f27"
+    />
+    <section
+      className="css-194lopa"
+    >
+      <section
+        className="css-1oskuwq"
+      >
+        <div
+          className="css-1qvptwv"
+          onChange={[Function]}
+          type="text"
+          value="15.34"
+        >
+          <input
+            className="css-5qep15"
+            onChange={[Function]}
+            type="text"
+            value="15.34"
+          />
+        </div>
+        <div
+          className="css-1x7hx5v"
+          onClick={[Function]}
+        >
+          <p
+            className="css-1b5o5hi"
+          >
+            
+          </p>
+          <p
+            className="css-1j7n4jp"
+          >
+            
+          </p>
+        </div>
+      </section>
+      <div
+        className="css-aijkp"
+      >
+        <img
+          className="css-bobwps"
+          src="Coin.svg"
+        />
+      </div>
+      <section
+        className="css-1oskuwq"
+      >
+        <div
+          className="css-1qvptwv"
+          onChange={[Function]}
+          type="text"
+          value="19.73"
+        >
+          <input
+            className="css-5qep15"
+            onChange={[Function]}
+            type="text"
+            value="19.73"
+          />
+        </div>
+        <div
+          className="css-1x7hx5v"
+          onClick={[Function]}
+        >
+          <p
+            className="css-1b5o5hi"
+          >
+            
+          </p>
+          <p
+            className="css-1j7n4jp"
+          >
+            
+          </p>
+        </div>
+      </section>
+    </section>
+    <section
+      className="css-1hppjzv"
+    >
+      <button
+        className="css-fi2zjy"
+        color="#3A539B"
+        label="EXCHANGE"
+        onClick={[Function]}
+        size="x-large"
+      >
+        EXCHANGE
+      </button>
+    </section>
+  </main>
+</main>
+`;

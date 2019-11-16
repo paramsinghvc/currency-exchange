@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render Button component properly should render a flat button 1`] = `
+<button
+  className="css-k394ta"
+  color="#7b68ee"
+  label="EXCHANGE"
+  onClick={[Function]}
+  size="x-large"
+>
+  EXCHANGE
+</button>
+`;
+
+exports[`Should render Button component properly should render a full-width button 1`] = `
+<button
+  className="css-1uq2sz1"
+  color="#7b68ee"
+  label="EXCHANGE"
+  onClick={[Function]}
+  size="large"
+>
+  EXCHANGE
+</button>
+`;
+
+exports[`Should render Button component properly should render a outlined button 1`] = `
+<button
+  className="css-jtv4lb"
+  color="#7b68ee"
+  label="EXCHANGE"
+  onClick={[Function]}
+  size="large"
+>
+  EXCHANGE
+</button>
+`;
+
+exports[`Should render Button component properly should render a rounded button 1`] = `
+<button
+  className="css-1v5kw01"
+  color="#7b68ee"
+  label="EXCHANGE"
+  onClick={[Function]}
+  size="large"
+>
+  EXCHANGE
+</button>
+`;
+
+exports[`Should render Button component properly should render a x-large button 1`] = `
+<button
+  className="css-dmogtu"
+  color="#7b68ee"
+  label="EXCHANGE"
+  onClick={[Function]}
+  size="x-large"
+>
+  EXCHANGE
+</button>
+`;

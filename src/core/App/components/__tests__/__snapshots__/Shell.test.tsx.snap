@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render the component 1`] = `
+<main
+  className="css-o8uaij"
+>
+  <header
+    className="css-uf1ume"
+  >
+    <section
+      className="css-m6ba0"
+      role="button"
+    >
+      <span />
+      <span />
+      <span />
+    </section>
+  </header>
+  <p>
+    Hola
+  </p>
+</main>
+`;

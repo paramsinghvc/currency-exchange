@@ -38,6 +38,7 @@ export const AnimeComp: FC<AnimeProps & { status: TransitionStatus }> = ({
     ) => {
       const stateIdentifier = "on" + capitalize(state);
       if (options[stateIdentifier]) {
+        /* Removing the previous animation only when new onHook is intercepted */
         callbackFn();
         return { ...animeOptions, ...options[stateIdentifier] };
       }
@@ -70,7 +71,7 @@ export const AnimeComp: FC<AnimeProps & { status: TransitionStatus }> = ({
   }, [status, childRef, duration, initProps]);
 
   const addTargetRef = useCallback(target => {
-    childRef.current = [...childRef.current, target];
+    if (target) childRef.current = [...childRef.current, target];
   }, []);
 
   return (

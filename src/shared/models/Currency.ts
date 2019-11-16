@@ -1,4 +1,3 @@
-import { IObject } from "shared/types";
 import currencyData from "shared/currencyData";
 import safeGet from "shared/utils/safeGet";
 

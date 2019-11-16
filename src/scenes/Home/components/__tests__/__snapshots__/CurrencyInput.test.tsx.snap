@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render CurrencyInput properly should render TextField when open is true 1`] = `
+<div
+  className="css-1l5b2qj"
+  onChange={[Function]}
+  type="text"
+  value={12.34}
+>
+  <input
+    className="css-1a7xov3"
+    onChange={[Function]}
+    type="text"
+    value={12.34}
+  />
+</div>
+`;

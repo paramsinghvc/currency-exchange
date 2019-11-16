@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should render Button component properly should render a full width text field 1`] = `
+<div
+  className="css-1l5b2qj"
+  onChange={[Function]}
+  type="text"
+  value="City of stars"
+>
+  <input
+    className="css-1a7xov3"
+    onChange={[Function]}
+    type="text"
+    value="City of stars"
+  />
+</div>
+`;
+
+exports[`Should render Button component properly should render a text field 1`] = `
+<div
+  className="css-1l5b2qj"
+  onChange={[Function]}
+  type="text"
+  value="City of stars"
+>
+  <input
+    className="css-1a7xov3"
+    onChange={[Function]}
+    type="text"
+    value="City of stars"
+  />
+</div>
+`;
+
+exports[`Should render Button component properly should render a text field with adornment 1`] = `
+<div
+  className="css-1l5b2qj"
+  onChange={[Function]}
+  type="text"
+  value="City of stars"
+>
+  <div
+    className="left css-100kda6"
+  >
+    <span>
+      $
+    </span>
+  </div>
+  <input
+    className="css-1a7xov3"
+    onChange={[Function]}
+    type="text"
+    value="City of stars"
+  />
+  <div
+    className="right"
+    css={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "__emotion_base": "div",
+        "__emotion_forwardProp": undefined,
+        "__emotion_real": [Circular],
+        "__emotion_styles": Array [
+          "
+  padding: ",
+          [Function],
+          ";
+  &.left {
+    border-right: 2px solid ",
+          "#F2F2F2",
+          ";
+  }
+  &.right {
+    border-left: 2px solid ",
+          "#F2F2F2",
+          ";
+  }
+",
+        ],
+        "defaultProps": undefined,
+        "displayName": "Styled(div)",
+        "render": [Function],
+        "withComponent": [Function],
+      }
+    }
+  >
+    <span>
+      Kg
+    </span>
+  </div>
+</div>
+`;
