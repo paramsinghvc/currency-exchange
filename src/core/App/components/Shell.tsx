@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import styled from "@emotion/styled";
 
 import Navbar from "./Navbar";
@@ -24,6 +24,10 @@ const Shell: FC = ({ children }) => {
     }),
     {}
   );
+
+  useEffect(() => {
+    console.log("Shell Mounted");
+  }, []);
 
   return (
     <AppHolder blur={currencyModalStatus}>

@@ -132,7 +132,7 @@ export default {
     symbol: "&#107;&#114;"
   },
   EUR: {
-    name: "Euro Member Countries",
+    name: "Euro",
     symbol: "&#8364;"
   },
   FKP: {

@@ -28,6 +28,7 @@ import { fetchExchangeRateSaga, setCurrencyModalStatus } from "./home.redux";
 import { IRootState } from "shared/types";
 import { IActionFactory, IReduxOperations } from "@mollycule/redux-operation";
 import { Currency } from "shared/models/Currency";
+import Shell from "core/App/components/Shell";
 
 const Home: FC = () => {
   const {
@@ -102,7 +103,8 @@ const Home: FC = () => {
       if (sectionValue !== undefined) result[sectionIndex] = sectionValue;
 
       const otherCurrencyAmount =
-        (+result[sectionIndex] / selectedCurrencies[sectionIndex].rate) * selectedCurrencies[otherSectionIndex].rate;
+        (+result[sectionIndex] / (selectedCurrencies[sectionIndex].rate || 1)) *
+        (selectedCurrencies[otherSectionIndex].rate || 1);
 
       result[otherSectionIndex] = "" + roundVal(otherCurrencyAmount);
 
@@ -122,7 +124,7 @@ const Home: FC = () => {
   const activeExchangeRateString = useMemo(() => {
     const firstActiveCurrency = selectedCurrencies[0];
     const secondActiveCurrency = selectedCurrencies[1];
-    if (firstActiveCurrency && secondActiveCurrency) {
+    if (firstActiveCurrency && secondActiveCurrency && firstActiveCurrency.rate && secondActiveCurrency.rate) {
       const convertedSecondVal = roundVal(secondActiveCurrency.rate / firstActiveCurrency.rate);
       return {
         __html: `${firstActiveCurrency.symbol}1 = ${secondActiveCurrency.symbol}${convertedSecondVal}`
@@ -146,18 +148,6 @@ const Home: FC = () => {
     [selectedCurrencies, selectedSection, getUpdatedCurrencyAmounts, setCurrencyAmounts]
   );
 
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsOpen(true);
-    }, 1000);
-
-    setTimeout(() => {
-      setIsOpen(false);
-    }, 4000);
-  }, []);
-
   const [showToast, setShowToast] = useState(false);
   const handleExchange = useCallback(() => {
     setShowToast(true);
@@ -167,7 +157,7 @@ const Home: FC = () => {
   }, []);
 
   return (
-    <>
+    <Shell>
       <Holder>
         <ActiveExchangeRateHolder>
           <Anime
@@ -261,7 +251,7 @@ const Home: FC = () => {
       >
         <Toast>Currency Exchanged successfully</Toast>
       </Anime>
-    </>
+    </Shell>
   );
 };
 

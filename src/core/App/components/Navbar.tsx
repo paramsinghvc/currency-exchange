@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useMemo } from "react";
 import styled from "@emotion/styled";
 
 import theme from "shared/theme";
@@ -32,11 +32,16 @@ const Hamburger = styled.section`
 `;
 
 const Navbar: FC = () => {
+  const shouldShowBack = useMemo(() => {
+    return window.location.pathname.includes("exchange");
+  }, [window.location.pathname]);
+
   return (
     <Header>
       <Hamburger role="button">
         <Anime
           open
+          appear
           duration={800}
           onEntering={{
             opacity: [0, 1],

@@ -88,14 +88,21 @@ export const AnimeComp: FC<AnimeProps & { status: TransitionStatus }> = ({
   );
 };
 
-const Anime: FC<
-  Pick<TransitionProps, "mountOnEnter" | "unmountOnExit" | "appear"> &
-    AnimeProps & {
-      open: boolean;
-      duration: number;
-      initProps?: AnimeProps;
-    }
-> = ({ open, duration, children, mountOnEnter = true, unmountOnExit = true, appear = true, initProps, ...props }) => {
+const Anime: FC<Pick<TransitionProps, "mountOnEnter" | "unmountOnExit" | "appear"> &
+  AnimeProps & {
+    open: boolean;
+    duration: number;
+    initProps?: AnimeProps;
+  }> = ({
+  open,
+  duration,
+  children,
+  mountOnEnter = true,
+  unmountOnExit = true,
+  appear = false,
+  initProps,
+  ...props
+}) => {
   return (
     <Transition mountOnEnter={mountOnEnter} unmountOnExit={unmountOnExit} appear={appear} in={open} timeout={duration}>
       {(status: TransitionStatus) => (

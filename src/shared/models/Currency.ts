@@ -5,7 +5,7 @@ export interface ICurrency {
   name: string;
   symbol: string;
   code: string;
-  rate: number;
+  rate?: number;
 }
 
 export type XMLAttributeData = {
@@ -19,9 +19,9 @@ export class Currency implements ICurrency {
   name: string;
   symbol: string;
   code: string;
-  rate: number;
+  rate?: number;
 
-  static create(options: { currency: string; rate: string }) {
+  static create(options: { currency: string; rate?: string }) {
     return new Currency(options);
   }
 
@@ -29,9 +29,9 @@ export class Currency implements ICurrency {
     return xmlData.map(({ _attributes: { currency, rate } }) => Currency.create({ currency, rate }));
   }
 
-  constructor(options: { currency: string; rate: string }) {
+  constructor(options: { currency: string; rate?: string }) {
     this.code = options.currency;
-    this.rate = +options.rate;
+    this.rate = options.rate ? +options.rate : undefined;
     this.symbol = safeGet(currencyData, `[${this.code}].symbol`);
     this.name = safeGet(currencyData, `[${this.code}].name`);
   }
