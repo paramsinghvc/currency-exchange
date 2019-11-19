@@ -8,7 +8,8 @@ exports[`should render the component 1`] = `
     className="css-uf1ume"
   >
     <section
-      className="css-m6ba0"
+      className="css-ei4gva"
+      onClick={[Function]}
       role="button"
     >
       <span />

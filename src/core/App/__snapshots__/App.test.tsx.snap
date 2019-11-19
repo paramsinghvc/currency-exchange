@@ -8,7 +8,8 @@ exports[`matches the snapshot 1`] = `
     className="css-uf1ume"
   >
     <section
-      className="css-m6ba0"
+      className="css-ei4gva"
+      onClick={[Function]}
       role="button"
     >
       <span />
@@ -16,44 +17,106 @@ exports[`matches the snapshot 1`] = `
       <span />
     </section>
   </header>
-  <main
-    className="css-13qacuc"
+  <section
+    className="css-1oskuwq"
   >
     <section
-      className="css-k68f27"
-    />
-    <section
-      className="css-194lopa"
+      className="css-1f9ksg8"
     >
       <section
-        className="css-1oskuwq"
-      />
-      <div
-        className="css-aijkp"
-      >
-        <img
-          className="css-bobwps"
-          src="Coin.svg"
-        />
-      </div>
-      <section
-        className="css-1oskuwq"
-      />
-    </section>
-    <section
-      className="css-1hppjzv"
-    >
-      <button
-        className="css-zgqnjn"
-        color="#3A539B"
-        disabled={true}
-        label="EXCHANGE"
+        className="css-f9952j"
         onClick={[Function]}
-        size="x-large"
       >
-        EXCHANGE
-      </button>
+        <h3
+          className="css-n4wyzy"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "&#163;58.33",
+            }
+          }
+        />
+        <p
+          className="css-1zubqt"
+        >
+          GBP
+           - 
+          United Kingdom Pound
+        </p>
+      </section>
+      <section
+        className="css-1rhsfo7"
+        onClick={[Function]}
+      >
+        <h3
+          className="css-n4wyzy"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "&#36;25.51",
+            }
+          }
+        />
+        <p
+          className="css-1zubqt"
+        >
+          USD
+           - 
+          United States Dollar
+        </p>
+      </section>
+      <section
+        className="css-15q58md"
+        onClick={[Function]}
+      >
+        <h3
+          className="css-n4wyzy"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "&#8377;116.12",
+            }
+          }
+        />
+        <p
+          className="css-1zubqt"
+        >
+          INR
+           - 
+          India Rupee
+        </p>
+      </section>
     </section>
-  </main>
+    <button
+      className="css-1t8781f"
+      color="#3A539B"
+      onClick={[Function]}
+      size="x-large"
+    >
+      <img
+        src="ExchangeWhite.svg"
+      />
+       EXCHANGE
+    </button>
+    <section
+      className="css-fdyf9c"
+    >
+      <div
+        className="css-1bpk6rf"
+      >
+        <article
+          className="css-b11t4d"
+        >
+          Transactions
+        </article>
+      </div>
+      <ul
+        className="css-qfu4gl"
+      >
+        <h3
+          className="css-q8s5zl"
+        >
+          No exchanges done yet
+        </h3>
+      </ul>
+    </section>
+  </section>
 </main>
 `;

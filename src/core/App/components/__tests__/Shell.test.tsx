@@ -7,12 +7,15 @@ import createStore from "core/utils/createStore";
 const store = createStore();
 const { Provider } = createStoreContext<IRootState>();
 import renderer from "react-test-renderer";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const tree = renderer.create(
   <Provider store={store}>
-    <Shell>
-      <p>Hola</p>
-    </Shell>
+    <Router>
+      <Shell>
+        <p>Hola</p>
+      </Shell>
+    </Router>
   </Provider>
 );
 

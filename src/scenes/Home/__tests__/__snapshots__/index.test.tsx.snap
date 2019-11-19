@@ -2,37 +2,59 @@
 
 exports[`Should render Home properly should match the home snapshot 1`] = `
 <main
-  className="css-13qacuc"
+  className="css-o8uaij"
 >
-  <section
-    className="css-k68f27"
-  />
-  <section
-    className="css-194lopa"
+  <header
+    className="css-uf1ume"
   >
     <section
-      className="css-1oskuwq"
-    />
-    <div
-      className="css-aijkp"
-    />
-    <section
-      className="css-1oskuwq"
-    />
-  </section>
-  <section
-    className="css-1hppjzv"
-  >
-    <button
-      className="css-zgqnjn"
-      color="#3A539B"
-      disabled={true}
-      label="EXCHANGE"
+      className="css-ei4gva"
       onClick={[Function]}
-      size="x-large"
+      role="button"
     >
-      EXCHANGE
-    </button>
-  </section>
+      <span />
+      <span />
+      <span />
+    </section>
+  </header>
+  <main
+    className="css-13qacuc"
+  >
+    <section
+      className="css-k68f27"
+    />
+    <section
+      className="css-194lopa"
+    >
+      <section
+        className="css-1oskuwq"
+      />
+      <div
+        className="css-aijkp"
+      >
+        <img
+          className="css-bobwps"
+          src="Coin.svg"
+        />
+      </div>
+      <section
+        className="css-1oskuwq"
+      />
+    </section>
+    <section
+      className="css-1hppjzv"
+    >
+      <button
+        className="css-zgqnjn"
+        color="#3A539B"
+        disabled={true}
+        label="EXCHANGE"
+        onClick={[Function]}
+        size="x-large"
+      >
+        EXCHANGE
+      </button>
+    </section>
+  </main>
 </main>
 `;
