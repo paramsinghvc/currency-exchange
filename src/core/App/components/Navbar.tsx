@@ -1,9 +1,10 @@
-import React, { FC, useMemo } from "react";
+import React, { FC, useMemo, useCallback } from "react";
 import styled from "@emotion/styled";
 
 import theme from "shared/theme";
 import Anime from "shared/components/Anime";
 import animejs from "animejs";
+import { useHistory } from "react-router";
 
 const Header = styled.header`
   display: flex;
@@ -12,6 +13,7 @@ const Header = styled.header`
 
 const Hamburger = styled.section`
   display: flex;
+  cursor: pointer;
   flex-direction: column;
   width: 40px;
   margin: 20px;
@@ -31,31 +33,68 @@ const Hamburger = styled.section`
   }
 `;
 
-const Navbar: FC = () => {
-  const shouldShowBack = useMemo(() => {
-    return window.location.pathname.includes("exchange");
-  }, [window.location.pathname]);
+const Navbar: FC<{ showBackButton?: boolean }> = ({ showBackButton }) => {
+  const history = useHistory();
+
+  const handleBack = useCallback(() => {
+    showBackButton && history.goBack();
+  }, [showBackButton]);
 
   return (
     <Header>
-      <Hamburger role="button">
-        <Anime
-          open
-          appear
-          duration={800}
-          onEntering={{
-            opacity: [0, 1],
-            translateX: ["-100%", 0],
-            scaleX: [1.2],
-            delay: animejs.stagger(50),
-            easing: "easeInOutQuart"
-          }}
-          onEntered={{ scaleX: 1, delay: animejs.stagger(75), duration: 300, easing: "linear" }}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </Anime>
+      <Hamburger role="button" onClick={handleBack}>
+        {showBackButton ? (
+          <>
+            <Anime
+              open
+              appear
+              duration={200}
+              onEntering={{
+                rotate: { value: -45, duration: 0 },
+                translateX: -2,
+                translateY: "0%",
+                width: "50%",
+                easing: "linear"
+              }}
+            >
+              <span></span>
+            </Anime>
+            <Anime
+              open
+              appear
+              duration={400}
+              onEntering={{ width: "90%", translateX: ["100px", 0], opacity: [0, 1], easing: "linear" }}
+            >
+              <span></span>
+            </Anime>
+            <Anime
+              open
+              appear
+              duration={400}
+              onEntering={{ width: "50%", rotate: { value: 45, duration: 0 }, translateX: -2, easing: "linear" }}
+            >
+              <span></span>
+            </Anime>
+          </>
+        ) : (
+          <Anime
+            open
+            appear
+            duration={800}
+            onEntering={{
+              opacity: [0, 1],
+              translateX: ["-100%", 0],
+              scaleX: [1.2],
+              delay: animejs.stagger(50),
+              easing: "easeInOutQuart"
+            }}
+            onEntered={{ scaleX: 1, delay: animejs.stagger(75), duration: 300, easing: "linear" }}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </Anime>
+        )}
       </Hamburger>
     </Header>
   );

@@ -34,11 +34,16 @@ const Home: FC = () => {
   const {
     currencyData,
     currencyModalStatus,
+    wallet,
     setCurrencyModalStatus: setCurrencyModalStatusAction,
     fetchExchangeRateSaga: fetchExchangeRateSagaAction
   } = useRedux<
     IRootState,
-    { currencyModalStatus: boolean; currencyData: IReduxOperations<Currency[]> },
+    {
+      currencyModalStatus: boolean;
+      currencyData: IReduxOperations<Currency[]>;
+      wallet: IRootState["transactions"]["wallet"];
+    },
     {
       setCurrencyModalStatus: IActionFactory<symbol, boolean>;
       fetchExchangeRateSaga: IActionFactory<string, unknown>;
@@ -46,7 +51,8 @@ const Home: FC = () => {
   >(
     state => ({
       currencyModalStatus: state.home.currencyModalStatus,
-      currencyData: state.home.currencyData
+      currencyData: state.home.currencyData,
+      wallet: state.transactions.wallet
     }),
     { setCurrencyModalStatus, fetchExchangeRateSaga }
   );
@@ -64,13 +70,25 @@ const Home: FC = () => {
   const [currencyAmounts, setCurrencyAmounts] = useState<Array<string>>(["15.34", "19.73"]);
   const [selectedSection, setSelectedSection] = useState(0);
 
-  const findCurrencyWithCode = (currencies: Currency[], code: string) =>
-    currencies.find((val: Currency) => val.code === code);
+  const findCurrencyWithCode = (currencies: Currency[], code: string) => {
+    const result = currencies.find((val: Currency) => val.code === code);
+    if (result) {
+      const existingPocket = wallet.find(w => w.code === result.code);
+      result.amount = safeGet(existingPocket, "amount", 0);
+    }
+    return result;
+  };
 
   useEffect(() => {
     if (currencyData.payload) {
-      const firstDefaultCurrency = findCurrencyWithCode(currencyData.payload, "GBP");
-      const secondDefaultCurrency = findCurrencyWithCode(currencyData.payload, "USD");
+      const firstDefaultCurrency = findCurrencyWithCode(
+        currencyData.payload,
+        safeGet(selectedCurrencies, "0.code", "GBP")
+      );
+      const secondDefaultCurrency = findCurrencyWithCode(
+        currencyData.payload,
+        safeGet(selectedCurrencies, "1.code", "USD")
+      );
       if (firstDefaultCurrency && secondDefaultCurrency)
         setSelectedCurrencies([firstDefaultCurrency, secondDefaultCurrency]);
     }
@@ -78,10 +96,17 @@ const Home: FC = () => {
 
   const handleCurrencyClick = useCallback(
     (sectionIndex: number) => () => {
-      setCurrencyChooserData({
-        ...currencyData,
-        payload: currencyData.payload.filter(datum => datum.code !== selectedCurrencies[sectionIndex].code)
-      });
+      setCurrencyChooserData(
+        sectionIndex === 0
+          ? {
+              ...currencyData,
+              payload: currencyData.payload.filter(datum => wallet.find(wallet => wallet.code === datum.code))
+            }
+          : {
+              ...currencyData,
+              payload: currencyData.payload.filter(datum => datum.code !== selectedCurrencies[sectionIndex].code)
+            }
+      );
       setCurrencyModalStatusAction(true);
       setSelectedSection(sectionIndex);
     },
@@ -115,6 +140,9 @@ const Home: FC = () => {
 
   const updateCurrencyAmount = useCallback(
     (sectionIndex: number) => (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      if (sectionIndex === 0 && +e.target.value > safeGet(selectedCurrencies, "0.amount")) {
+        return;
+      }
       const result = getUpdatedCurrencyAmounts({ sectionIndex, sectionValue: e.target.value, selectedCurrencies });
       setCurrencyAmounts(result);
     },
@@ -157,7 +185,7 @@ const Home: FC = () => {
   }, []);
 
   return (
-    <Shell>
+    <Shell showBackButton>
       <Holder>
         <ActiveExchangeRateHolder>
           <Anime
@@ -185,6 +213,16 @@ const Home: FC = () => {
               </StyledCurrencyInputHolder>
               <CurrencyDropdown onClick={handleCurrencyClick(0)}>
                 <CurrencyAbbr>{safeGet(selectedCurrencies, "0.code", "")}</CurrencyAbbr>
+                {safeGet(selectedCurrencies, "0.amount") !== undefined && (
+                  <CurrencyText
+                    dangerouslySetInnerHTML={{
+                      __html: `You have ${safeGet(selectedCurrencies, "0.symbol")}${safeGet(
+                        selectedCurrencies,
+                        "0.amount"
+                      )}`
+                    }}
+                  />
+                )}
                 <CurrencyText>{safeGet(selectedCurrencies, "0.name", "")}</CurrencyText>
               </CurrencyDropdown>
             </Anime>
@@ -219,6 +257,16 @@ const Home: FC = () => {
               </StyledCurrencyInputHolder>
               <CurrencyDropdown onClick={handleCurrencyClick(1)}>
                 <CurrencyAbbr>{safeGet(selectedCurrencies, "1.code", "")}</CurrencyAbbr>
+                {safeGet(selectedCurrencies, "1.amount") !== undefined && (
+                  <CurrencyText
+                    dangerouslySetInnerHTML={{
+                      __html: `You have ${safeGet(selectedCurrencies, "1.symbol")}${safeGet(
+                        selectedCurrencies,
+                        "1.amount"
+                      )}`
+                    }}
+                  />
+                )}
                 <CurrencyText>{safeGet(selectedCurrencies, "1.name", "")}</CurrencyText>
               </CurrencyDropdown>
             </Anime>

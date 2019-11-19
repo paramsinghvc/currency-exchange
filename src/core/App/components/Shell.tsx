@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import styled from "@emotion/styled";
 
 import Navbar from "./Navbar";
@@ -17,7 +17,7 @@ const AppHolder = styled.main<{ blur?: boolean }>`
   `}
 `;
 
-const Shell: FC = ({ children }) => {
+const Shell: FC<{ showBackButton?: boolean }> = ({ showBackButton, children }) => {
   const { currencyModalStatus } = useRedux<IRootState, Pick<IRootState["home"], "currencyModalStatus">>(
     state => ({
       currencyModalStatus: state.home.currencyModalStatus
@@ -25,13 +25,9 @@ const Shell: FC = ({ children }) => {
     {}
   );
 
-  useEffect(() => {
-    console.log("Shell Mounted");
-  }, []);
-
   return (
     <AppHolder blur={currencyModalStatus}>
-      <Navbar />
+      <Navbar showBackButton={showBackButton} />
       {children}
     </AppHolder>
   );

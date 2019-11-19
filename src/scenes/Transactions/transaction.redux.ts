@@ -16,7 +16,6 @@ export const addTransaction = createActionWithPayload<symbol, Transaction>(
 );
 
 export const constructWalletInitState = (walletValues: Array<{ code: string; amount: number }>) => {
-  console.log(walletValues);
   return walletValues.map(({ code, amount }) => ({
     code,
     amount,
@@ -36,7 +35,7 @@ export const initialState = {
       amount: 25.51
     },
     {
-      code: "EUR",
+      code: "INR",
       amount: 116.12
     }
   ]),
