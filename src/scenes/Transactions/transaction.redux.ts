@@ -43,14 +43,16 @@ export const initialState = {
   transactions: [] as Transaction[]
 };
 
+const roundVal = (val: number) => Math.round(val * 100) / 100;
+
 const transactionReducer = (state = initialState, { type, payload }: IAction<symbol, any>) => {
   switch (type) {
     case TransactionConstants.get(SET_WALLET_POCKET_AMOUNT): {
       const newWalletArr = [...state.wallet];
       const { code, amount } = payload as { code: string; amount: number };
       const idx = newWalletArr.findIndex(wallet => wallet.code === code);
-      if (idx) {
-        newWalletArr[idx] = { ...newWalletArr[idx], amount };
+      if (idx > -1) {
+        newWalletArr[idx] = { ...newWalletArr[idx], amount: roundVal(amount) };
         return { ...state, wallet: newWalletArr };
       }
       return state;

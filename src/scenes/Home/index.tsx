@@ -168,7 +168,7 @@ const Home: FC = () => {
   const handleSelectedCurrencyChange = useCallback(
     (currency: Currency) => {
       const result = [...selectedCurrencies];
-      result[selectedSection] = currency;
+      result[selectedSection] = findCurrencyWithCode(currencyData.payload, currency.code) || currency;
       setSelectedCurrencies(result);
 
       const updatedCurrencyAmounts = getUpdatedCurrencyAmounts({
@@ -177,7 +177,14 @@ const Home: FC = () => {
       });
       setCurrencyAmounts(updatedCurrencyAmounts);
     },
-    [selectedCurrencies, selectedSection, getUpdatedCurrencyAmounts, setCurrencyAmounts]
+    [
+      selectedCurrencies,
+      selectedSection,
+      getUpdatedCurrencyAmounts,
+      setCurrencyAmounts,
+      findCurrencyWithCode,
+      currencyData
+    ]
   );
 
   const [showToast, setShowToast] = useState(false);
