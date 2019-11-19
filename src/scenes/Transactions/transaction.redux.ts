@@ -1,5 +1,4 @@
 import { createActionWithPayload, IAction, makeConstants } from "@mollycule/redux-operation";
-import { Currency } from "shared/models/Currency";
 import Transaction from "shared/models/Transaction";
 import currencyData from "shared/currencyData";
 
@@ -14,6 +13,8 @@ export const setWalletPocketAmount = createActionWithPayload<symbol, { code: str
 export const addTransaction = createActionWithPayload<symbol, Transaction>(
   TransactionConstants.get(ADD_TRANSACTION) as symbol
 );
+
+export const performExchange = createActionWithPayload<string, Transaction>("PERFORM_EXCHANGE");
 
 export const constructWalletInitState = (walletValues: Array<{ code: string; amount: number }>) => {
   return walletValues.map(({ code, amount }) => ({

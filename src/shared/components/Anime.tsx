@@ -2,7 +2,6 @@ import React, { FC, useCallback, useEffect, useRef } from "react";
 import { Transition } from "react-transition-group";
 import { TransitionStatus, TransitionProps } from "react-transition-group/Transition";
 import anime, { AnimeParams } from "animejs";
-import { callbackify } from "util";
 
 function capitalize(s: string | undefined) {
   return s && s[0].toUpperCase() + s.slice(1);
@@ -67,7 +66,7 @@ export const AnimeComp: FC<AnimeProps & { status: TransitionStatus }> = ({
     if (initProps) {
       anime.set(childRef.current, initProps);
     }
-    const animeRef = anime(animeOptions);
+    anime(animeOptions);
   }, [status, childRef, duration, initProps]);
 
   const addTargetRef = useCallback(target => {

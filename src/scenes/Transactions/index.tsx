@@ -6,7 +6,7 @@ import ExchangeIcon from "assets/ExchangeIcon.png";
 import ExchangeWhite from "assets/ExchangeWhite.svg";
 import theme from "shared/theme";
 import { IRootState } from "shared/types";
-import { IActionFactory, IReduxOperations } from "@mollycule/redux-operation";
+import { IActionFactory } from "@mollycule/redux-operation";
 import { setWalletPocketAmount, addTransaction } from "./transaction.redux";
 import {
   Holder,
@@ -24,7 +24,8 @@ import {
   TTo,
   TSection,
   Separator,
-  HeadingText
+  HeadingText,
+  EmptyTransactions
 } from "./styles";
 import Transaction from "shared/models/Transaction";
 import Shell from "core/App/components/Shell";
@@ -106,12 +107,12 @@ const TransactionsComp: FC = () => {
           </Separator>
           <Transactions>
             {transactions.map(transaction => (
-              <TransactionItem>
+              <TransactionItem key={transaction.timestamp}>
                 <TIcon src={ExchangeIcon} />
                 <THeading>
                   Exchanged from {transaction.from.currency.code} to {transaction.to.currency.code}
                 </THeading>
-                <TTimestamp>{transaction.timestamp} </TTimestamp>
+                <TTimestamp>{new Date(transaction.timestamp).toLocaleString()} </TTimestamp>
                 <TTo
                   dangerouslySetInnerHTML={{ __html: `+${transaction.to.currency.symbol}${transaction.to.amount}` }}
                 />
@@ -120,14 +121,7 @@ const TransactionsComp: FC = () => {
                 />
               </TransactionItem>
             ))}
-
-            <TransactionItem>
-              <TIcon src={ExchangeIcon} />
-              <THeading>Exchanged from GBP to INR</THeading>
-              <TTimestamp>18th Nov - 2:00 pm </TTimestamp>
-              <TTo>£40</TTo>
-              <TFrom>+$7.45</TFrom>
-            </TransactionItem>
+            {transactions.length === 0 && <EmptyTransactions>No exchanges done yet</EmptyTransactions>}
           </Transactions>
         </TSection>
       </Holder>

@@ -135,3 +135,11 @@ export const HeadingText = styled.article`
   text-transform: uppercase;
   margin-left: -60px;
 `;
+
+export const EmptyTransactions = styled.h3`
+  color: ${theme.lightGray};
+  font-size: 14px;
+  text-align: center;
+  padding: 30px;
+  font-weight: lighter;
+`;

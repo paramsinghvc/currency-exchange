@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useCallback } from "react";
+import React, { FC, useCallback } from "react";
 import styled from "@emotion/styled";
 
 import theme from "shared/theme";

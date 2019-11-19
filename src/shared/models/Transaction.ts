@@ -1,5 +1,3 @@
-import currencyData from "shared/currencyData";
-import safeGet from "shared/utils/safeGet";
 import { Currency } from "./Currency";
 
 export type TransactionItem = {

@@ -1,10 +1,8 @@
 import React from "react";
-import styled from "@emotion/styled";
-import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Home from "scenes/Home";
 import Transactions from "scenes/Transactions";
-// import Shell from "./components/Shell";
 import createStore from "core/utils/createStore";
 import { createStoreContext } from "@mollycule/redux-hook";
 import { IRootState } from "shared/types";

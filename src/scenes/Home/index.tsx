@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, useCallback, ChangeEvent, FormEvent, useMemo } from "react";
+import React, { FC, useState, useEffect, useCallback, ChangeEvent, useMemo } from "react";
 import useRedux from "@mollycule/redux-hook";
 import Anime from "shared/components/Anime";
 import animejs from "animejs";
@@ -25,10 +25,12 @@ import {
   StyledCurrencyInputHolder
 } from "./styles";
 import { fetchExchangeRateSaga, setCurrencyModalStatus } from "./home.redux";
+import { performExchange } from "scenes/Transactions/transaction.redux";
 import { IRootState } from "shared/types";
 import { IActionFactory, IReduxOperations } from "@mollycule/redux-operation";
 import { Currency } from "shared/models/Currency";
 import Shell from "core/App/components/Shell";
+import Transaction from "shared/models/Transaction";
 
 const Home: FC = () => {
   const {
@@ -36,7 +38,8 @@ const Home: FC = () => {
     currencyModalStatus,
     wallet,
     setCurrencyModalStatus: setCurrencyModalStatusAction,
-    fetchExchangeRateSaga: fetchExchangeRateSagaAction
+    fetchExchangeRateSaga: fetchExchangeRateSagaAction,
+    performExchange: performExchangeAction
   } = useRedux<
     IRootState,
     {
@@ -47,6 +50,7 @@ const Home: FC = () => {
     {
       setCurrencyModalStatus: IActionFactory<symbol, boolean>;
       fetchExchangeRateSaga: IActionFactory<string, unknown>;
+      performExchange: IActionFactory<string, Transaction>;
     }
   >(
     state => ({
@@ -54,7 +58,7 @@ const Home: FC = () => {
       currencyData: state.home.currencyData,
       wallet: state.transactions.wallet
     }),
-    { setCurrencyModalStatus, fetchExchangeRateSaga }
+    { setCurrencyModalStatus, fetchExchangeRateSaga, performExchange }
   );
 
   useEffect(() => {
@@ -178,11 +182,19 @@ const Home: FC = () => {
 
   const [showToast, setShowToast] = useState(false);
   const handleExchange = useCallback(() => {
+    const [fromCurrency, toCurrency] = selectedCurrencies;
+    performExchangeAction(
+      Transaction.create({
+        from: { code: fromCurrency.code, amount: +currencyAmounts[0] },
+        to: { code: toCurrency.code, amount: +currencyAmounts[1] },
+        timestamp: new Date().toISOString()
+      })
+    );
     setShowToast(true);
     setTimeout(() => {
       setShowToast(false);
     }, 2000);
-  }, []);
+  }, [selectedCurrencies, currencyAmounts]);
 
   return (
     <Shell showBackButton>
