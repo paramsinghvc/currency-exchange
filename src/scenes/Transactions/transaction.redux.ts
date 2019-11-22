@@ -59,7 +59,7 @@ const transactionReducer = (state = initialState, { type, payload }: IAction<sym
     }
 
     case TransactionConstants.get(ADD_TRANSACTION): {
-      return { ...state, transactions: [...state.transactions, payload as Transaction] };
+      return { ...state, transactions: [payload as Transaction, ...state.transactions] };
     }
 
     default:

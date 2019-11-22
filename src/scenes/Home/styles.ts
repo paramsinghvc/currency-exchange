@@ -99,9 +99,9 @@ export const ExchangeButton = styled(Button)`
   outline: none;
 `;
 
-export const Toast = styled.main`
+export const Toast = styled.main<{ type: string }>`
   padding: 10px 20px;
-  background: rgba(186, 220, 88, 0.9);
+  background: ${({ type }) => (type === "error" ? "#ff6b6b" : "rgba(186, 220, 88, 0.9)")};
   color: ${theme.darkGrayTextColor};
   font-size: 14px;
   text-align: center;

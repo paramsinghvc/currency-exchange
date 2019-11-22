@@ -1,6 +1,8 @@
 import React, { FC, useState, useCallback } from "react";
 import useRedux from "@mollycule/redux-hook";
 import { useHistory } from "react-router-dom";
+import animejs from "animejs";
+import Anime from "shared/components/Anime";
 
 import ExchangeIcon from "assets/ExchangeIcon.png";
 import ExchangeWhite from "assets/ExchangeWhite.svg";
@@ -43,12 +45,7 @@ type MapDispatchProps = {
 
 const TransactionsComp: FC = () => {
   const history = useHistory();
-  const {
-    wallet,
-    transactions,
-    setWalletPocketAmount: setWalletPocketAmountAction,
-    addTransaction: addTransactionAction
-  } = useRedux<IRootState, IRootState["transactions"], MapDispatchProps>(
+  const { wallet, transactions } = useRedux<IRootState, IRootState["transactions"], MapDispatchProps>(
     state => ({
       wallet: state.transactions.wallet,
       transactions: state.transactions.transactions
@@ -72,7 +69,7 @@ const TransactionsComp: FC = () => {
 
   const handleExchangeClick = useCallback(() => {
     history.push("/exchange");
-  }, []);
+  }, [history]);
 
   return (
     <Shell>
@@ -99,28 +96,42 @@ const TransactionsComp: FC = () => {
           rounded
           size="x-large"
         >
-          <img src={ExchangeWhite} /> EXCHANGE
+          <img src={ExchangeWhite} alt="Exchange Icon" /> EXCHANGE
         </ExchangeButton>
         <TSection>
           <Separator>
             <HeadingText>Transactions</HeadingText>
           </Separator>
           <Transactions>
-            {transactions.map(transaction => (
-              <TransactionItem key={transaction.timestamp}>
-                <TIcon src={ExchangeIcon} />
-                <THeading>
-                  Exchanged from {transaction.from.currency.code} to {transaction.to.currency.code}
-                </THeading>
-                <TTimestamp>{new Date(transaction.timestamp).toLocaleString()} </TTimestamp>
-                <TTo
-                  dangerouslySetInnerHTML={{ __html: `+${transaction.to.currency.symbol}${transaction.to.amount}` }}
-                />
-                <TFrom
-                  dangerouslySetInnerHTML={{ __html: `-${transaction.from.currency.symbol}${transaction.from.amount}` }}
-                />
-              </TransactionItem>
-            ))}
+            <Anime
+              open
+              duration={300}
+              appear
+              onEntering={{
+                translateY: [100, 0],
+                opacity: [0, 1],
+                delay: animejs.stagger(60),
+                easing: "linear"
+              }}
+            >
+              {transactions.map(transaction => (
+                <TransactionItem key={transaction.timestamp}>
+                  <TIcon src={ExchangeIcon} />
+                  <THeading>
+                    Exchanged from {transaction.from.currency.code} to {transaction.to.currency.code}
+                  </THeading>
+                  <TTimestamp>{new Date(transaction.timestamp).toLocaleString()} </TTimestamp>
+                  <TTo
+                    dangerouslySetInnerHTML={{ __html: `+${transaction.to.currency.symbol}${transaction.to.amount}` }}
+                  />
+                  <TFrom
+                    dangerouslySetInnerHTML={{
+                      __html: `-${transaction.from.currency.symbol}${transaction.from.amount}`
+                    }}
+                  />
+                </TransactionItem>
+              ))}
+            </Anime>
             {transactions.length === 0 && <EmptyTransactions>No exchanges done yet</EmptyTransactions>}
           </Transactions>
         </TSection>

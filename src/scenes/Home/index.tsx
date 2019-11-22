@@ -1,7 +1,8 @@
-import React, { FC, useState, useEffect, useCallback, ChangeEvent, useMemo } from "react";
+import React, { FC, useState, useEffect, useCallback, ChangeEvent, useMemo, useRef } from "react";
 import useRedux from "@mollycule/redux-hook";
 import Anime from "shared/components/Anime";
 import animejs from "animejs";
+import { useHistory } from "react-router-dom";
 
 import safeGet from "shared/utils/safeGet";
 import CurrencyChooser from "./components/CurrencyChooser";
@@ -33,6 +34,7 @@ import Shell from "core/App/components/Shell";
 import Transaction from "shared/models/Transaction";
 
 const Home: FC = () => {
+  const history = useHistory();
   const {
     currencyData,
     currencyModalStatus,
@@ -71,17 +73,20 @@ const Home: FC = () => {
 
   const [currencyChooserData, setCurrencyChooserData] = useState(currencyData);
   const [selectedCurrencies, setSelectedCurrencies] = useState<Array<Currency>>([]);
-  const [currencyAmounts, setCurrencyAmounts] = useState<Array<string>>(["15.34", "19.73"]);
+  const [currencyAmounts, setCurrencyAmounts] = useState<Array<string>>(["", ""]);
   const [selectedSection, setSelectedSection] = useState(0);
 
-  const findCurrencyWithCode = (currencies: Currency[], code: string) => {
-    const result = currencies.find((val: Currency) => val.code === code);
-    if (result) {
-      const existingPocket = wallet.find(w => w.code === result.code);
-      result.amount = safeGet(existingPocket, "amount", 0);
-    }
-    return result;
-  };
+  const findCurrencyWithCode = useCallback(
+    (currencies: Currency[], code: string) => {
+      const result = currencies.find((val: Currency) => val.code === code);
+      if (result) {
+        const existingPocket = wallet.find(w => w.code === result.code);
+        result.amount = safeGet(existingPocket, "amount", 0);
+      }
+      return result;
+    },
+    [wallet]
+  );
 
   useEffect(() => {
     if (currencyData.payload) {
@@ -96,7 +101,8 @@ const Home: FC = () => {
       if (firstDefaultCurrency && secondDefaultCurrency)
         setSelectedCurrencies([firstDefaultCurrency, secondDefaultCurrency]);
     }
-  }, [currencyData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currencyData, findCurrencyWithCode]);
 
   const handleCurrencyClick = useCallback(
     (sectionIndex: number) => () => {
@@ -114,7 +120,7 @@ const Home: FC = () => {
       setCurrencyModalStatusAction(true);
       setSelectedSection(sectionIndex);
     },
-    [setCurrencyModalStatusAction, currencyData, selectedCurrencies]
+    [setCurrencyModalStatusAction, currencyData, selectedCurrencies, wallet]
   );
 
   const roundVal = (val: number) => Math.round(val * 100) / 100;
@@ -187,9 +193,30 @@ const Home: FC = () => {
     ]
   );
 
-  const [showToast, setShowToast] = useState(false);
+  const [showToast, setShowToast] = useState({ type: "success", message: "", show: false });
+  const toastTimerRef = useRef<NodeJS.Timeout | null>();
+
+  const showTransientToast = useCallback(
+    (message: string, type: string, duration: number, cb?: Function) => {
+      if (toastTimerRef.current) {
+        clearInterval(toastTimerRef.current);
+      }
+      setShowToast({ message, type, show: true });
+      toastTimerRef.current = setTimeout(() => {
+        setShowToast({ type, message, show: false });
+        cb && cb();
+        toastTimerRef.current = null;
+      }, duration);
+    },
+    [toastTimerRef]
+  );
+
   const handleExchange = useCallback(() => {
     const [fromCurrency, toCurrency] = selectedCurrencies;
+    if (fromCurrency.amount && +currencyAmounts[0] > fromCurrency.amount) {
+      showTransientToast("Entered Amount is greater than wallet", "error", 1500);
+      return;
+    }
     performExchangeAction(
       Transaction.create({
         from: { code: fromCurrency.code, amount: +currencyAmounts[0] },
@@ -197,11 +224,11 @@ const Home: FC = () => {
         timestamp: new Date().toISOString()
       })
     );
-    setShowToast(true);
-    setTimeout(() => {
-      setShowToast(false);
-    }, 2000);
-  }, [selectedCurrencies, currencyAmounts]);
+    // setCurrencyAmounts([Math.min(+currencyAmounts[0], +(fromCurrency!.amount)), currencyAmounts[1]])
+    showTransientToast("Currency Exchanged successfully", "success", 1500, () => {
+      history.push("/");
+    });
+  }, [selectedCurrencies, currencyAmounts, performExchangeAction, history, showTransientToast]);
 
   return (
     <Shell showBackButton>
@@ -228,6 +255,7 @@ const Home: FC = () => {
                   fullWidth={false}
                   value={currencyAmounts[0]}
                   onChange={updateCurrencyAmount(0)}
+                  autoFocus
                 />
               </StyledCurrencyInputHolder>
               <CurrencyDropdown onClick={handleCurrencyClick(0)}>
@@ -311,12 +339,12 @@ const Home: FC = () => {
         onChange={handleSelectedCurrencyChange}
       />
       <Anime
-        open={showToast}
+        open={showToast.show}
         duration={500}
         onEntering={{ translateY: ["-100%", 0], opacity: [0, 1] }}
         onExiting={{ translateY: "-100%", opacity: 0 }}
       >
-        <Toast>Currency Exchanged successfully</Toast>
+        <Toast type={showToast.type}>{showToast.message}</Toast>
       </Anime>
     </Shell>
   );

@@ -67,7 +67,7 @@ export const AnimeComp: FC<AnimeProps & { status: TransitionStatus }> = ({
       anime.set(childRef.current, initProps);
     }
     anime(animeOptions);
-  }, [status, childRef, duration, initProps]);
+  }, [status, childRef, duration, initProps, buildAnimeOptions, onEntering, onEntered, onExited, onExiting, props]);
 
   const addTargetRef = useCallback(target => {
     if (target) childRef.current = [...childRef.current, target];

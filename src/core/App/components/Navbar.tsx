@@ -38,7 +38,7 @@ const Navbar: FC<{ showBackButton?: boolean }> = ({ showBackButton }) => {
 
   const handleBack = useCallback(() => {
     showBackButton && history.goBack();
-  }, [showBackButton]);
+  }, [showBackButton, history]);
 
   return (
     <Header>

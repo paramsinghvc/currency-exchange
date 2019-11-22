@@ -91,6 +91,7 @@ exports[`matches the snapshot 1`] = `
       size="x-large"
     >
       <img
+        alt="Exchange Icon"
         src="ExchangeWhite.svg"
       />
        EXCHANGE
