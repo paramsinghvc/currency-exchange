@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useEffect, useRef } from "react";
 import { Transition } from "react-transition-group";
 import { TransitionStatus, TransitionProps } from "react-transition-group/Transition";
-import anime, { AnimeParams } from "animejs";
+import anime, { AnimeParams, AnimeInstance } from "animejs";
 
 function capitalize(s: string | undefined) {
   return s && s[0].toUpperCase() + s.slice(1);
@@ -13,19 +13,12 @@ export type AnimeProps = AnimeParams & {
   onExited?: AnimeParams;
   onExiting?: AnimeParams;
   initProps?: AnimeProps;
+  animeRef?: React.MutableRefObject<AnimeInstance | undefined>;
 };
 
-export const AnimeComp: FC<AnimeProps & { status: TransitionStatus }> = ({
-  duration,
-  children,
-  status,
-  onEntering,
-  onEntered,
-  onExited,
-  onExiting,
-  initProps,
-  ...props
-}) => {
+export const AnimeComp: FC<AnimeProps & {
+  status: TransitionStatus;
+}> = ({ duration, children, status, onEntering, onEntered, onExited, onExiting, initProps, animeRef, ...props }) => {
   const childRef = useRef<HTMLElement[]>([]);
 
   const buildAnimeOptions = useCallback(
@@ -66,7 +59,10 @@ export const AnimeComp: FC<AnimeProps & { status: TransitionStatus }> = ({
     if (initProps) {
       anime.set(childRef.current, initProps);
     }
-    anime(animeOptions);
+    const animeInstance = anime(animeOptions);
+    if (animeRef) {
+      animeRef.current = animeInstance;
+    }
   }, [status, childRef, duration, initProps, buildAnimeOptions, onEntering, onEntered, onExited, onExiting, props]);
 
   const addTargetRef = useCallback(target => {
@@ -92,6 +88,7 @@ const Anime: FC<Pick<TransitionProps, "mountOnEnter" | "unmountOnExit" | "appear
     open: boolean;
     duration: number;
     initProps?: AnimeProps;
+    animeRef?: React.MutableRefObject<AnimeInstance | undefined>;
   }> = ({
   open,
   duration,
