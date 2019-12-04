@@ -88,7 +88,7 @@ const Navbar: FC<{ showBackButton?: boolean }> = ({ showBackButton }) => {
               delay: animejs.stagger(50),
               easing: "easeInOutQuart"
             }}
-            onEntered={{ scaleX: 1, delay: animejs.stagger(75), duration: 300, easing: "linear" }}
+            onEntered={{ scaleX: 1, delay: animejs.stagger(100), duration: 300, easing: "linear" }}
           >
             <span></span>
             <span></span>

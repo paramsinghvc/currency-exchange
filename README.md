@@ -1,3 +1,5 @@
+[![Build Status](https://img.shields.io/travis/paramsinghvc/currency-exchange/test?style=for-the-badge)](https://travis-ci.org/paramsinghvc/currency-exchange)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
